@@ -1,7 +1,9 @@
-﻿internal class Game
+﻿using SimpleConsoleGame;
+
+internal class Game
 {
     private Map _map = null!;
-    private Player _player = null!;
+    private Creature _player = null!;
     public Game()
     {
     }
@@ -56,7 +58,9 @@
 
     private void Init()
     {
+        //ToDo: Read from config
         _map = new Map(height:10, width: 10);
-        _player = new Player(); 
+        Cell? playerCell = _map.GetCell(0, 0); 
+        _player = new Player(playerCell!); 
     }
 }
