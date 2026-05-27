@@ -12,7 +12,15 @@ internal class Map
         Height = height;
         Width = width;
 
-        _cells = new Cell[height, width]; 
+        _cells = new Cell[height, width];
+
+        for (int y = 0; y < Height; y++)
+        {
+            for (int x = 0; x < Width; x++)
+            {
+                _cells[y, x] = new Cell(); 
+            }
+        }
     }
 
     //[return: MaybeNull]
