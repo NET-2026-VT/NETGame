@@ -18,6 +18,7 @@
         do
         {
             //DrawMap
+            DrawMap();
 
             //GetCommand
 
@@ -29,8 +30,28 @@
 
             //DrawMap
 
+            Console.ReadKey(); 
+
 
         } while (gameInProgress);
+    }
+
+    private void DrawMap()
+    {
+        Console.Clear();
+
+        for (int y = 0; y < _map.Height; y++)
+        {
+            for (int x = 0; x < _map.Width; x++)
+            {
+                //ToDo Fix nullable
+                Cell? cell = _map.GetCell(y, x);
+                Console.ForegroundColor = cell?.Color ?? ConsoleColor.Gray;
+                Console.Write(cell.Symbol); 
+            }
+            Console.WriteLine();
+        }
+        Console.ResetColor(); 
     }
 
     private void Init()
