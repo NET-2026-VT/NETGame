@@ -1,1 +1,3 @@
-﻿Console.WriteLine("Hello, World!");
+﻿var game = new Game();
+
+game.Run(); 
