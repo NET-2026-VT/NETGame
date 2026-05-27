@@ -48,6 +48,8 @@ internal class Game
             {
                 //ToDo Fix nullable
                 Cell? cell = _map.GetCell(y, x);
+                ArgumentNullException.ThrowIfNull(cell, nameof(cell)); 
+
                 Console.ForegroundColor = cell?.Color ?? ConsoleColor.Gray;
                 Console.Write(cell.Symbol); 
             }

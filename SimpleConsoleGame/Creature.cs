@@ -1,4 +1,4 @@
-﻿internal class Creature
+﻿internal abstract class Creature : IDrawable
 {
     public string Symbol { get; }
     public ConsoleColor Color { get; set; } = ConsoleColor.Green;
