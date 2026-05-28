@@ -20,7 +20,7 @@ internal class Map
         {
             for (int x = 0; x < Width; x++)
             {
-                _cells[y, x] = new Cell(); 
+                _cells[y, x] = new Cell(y,x); 
             }
         }
     }
@@ -28,14 +28,6 @@ internal class Map
     //[return: MaybeNull]
     internal Cell? GetCell(int y, int x)
     {
-        try
-        {
-            return _cells[y, x]; 
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message); 
-            return null; 
-        }
+        return (y < 0 || y >= Height || x < 0 || x >= Width) ? null : _cells[y, x];
     }
 }
