@@ -1,4 +1,5 @@
 ﻿using SimpleConsoleGame;
+using SimpleConsoleGame.Extensions;
 
 internal class Game
 {
@@ -62,7 +63,7 @@ internal class Game
         Position newPosition = _player.Cell.Position + movement;
         //new Position(_player.Cell.Position.Y + movement.Y, _player.Cell.Position.X + movement.X);
 
-        var newCell = _map.GetCell(newPosition);
+        Cell? newCell = _map.GetCell(newPosition);
         if (newCell is not null) _player.Cell = newCell; 
         
     }
@@ -75,17 +76,10 @@ internal class Game
         {
             for (int x = 0; x < _map.Width; x++)
             {
-                //ToDo Fix nullable
                 Cell? cell = _map.GetCell(y, x);
                 ArgumentNullException.ThrowIfNull(cell, nameof(cell));
 
-                IDrawable drawable = cell;
-                
-                foreach(Creature creature in _map.Creatures)
-                {
-                    if (creature.Cell == drawable)
-                        drawable = creature; 
-                }
+                IDrawable drawable = _map.Creatures.CreatureAt(cell);
 
                 Console.ForegroundColor = drawable.Color;
                 Console.Write(drawable.Symbol); 
