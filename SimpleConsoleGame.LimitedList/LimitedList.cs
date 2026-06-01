@@ -1,6 +1,8 @@
-﻿namespace SimpleConsoleGame.LimitedList;
+﻿using System.Collections;
 
-public class LimitedList<T> 
+namespace SimpleConsoleGame.LimitedList;
+
+public class LimitedList<T> : IEnumerable<T>
 {
     private List<T> _list;
     private int _capacity;
@@ -19,4 +21,18 @@ public class LimitedList<T>
         if(IsFull) return false;
         _list.Add(item); return true;
     }
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        //return _list.GetEnumerator();
+        foreach (T item in _list)
+        {
+            //....
+            //....
+            //....
+            yield return item;
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
