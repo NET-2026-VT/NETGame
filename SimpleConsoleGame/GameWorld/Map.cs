@@ -1,4 +1,4 @@
-﻿using SimpleConsoleGame;
+﻿using SimpleConsoleGame.GameWorld;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 

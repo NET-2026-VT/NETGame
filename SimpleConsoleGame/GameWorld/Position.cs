@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleConsoleGame
+namespace SimpleConsoleGame.GameWorld
 {
     internal struct Position
     {
