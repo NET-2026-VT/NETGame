@@ -2,7 +2,7 @@
 
 namespace SimpleConsoleGame.LimitedList;
 
-public class LimitedList<T> : IEnumerable<T>
+public class LimitedList<T> : IEnumerable<T> 
 {
     private List<T> _list;
     private int _capacity;
