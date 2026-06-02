@@ -29,6 +29,11 @@ using SimpleConsoleGame.LimitedList;
 
 var llllllll = new LimitedList<int>(2);
 
+var count = llllllll.Count;
+var count2 = llllllll.Count();
+
+
+
 foreach (var item in llllllll)
 {
     Console.WriteLine(item);
