@@ -5,7 +5,7 @@ using SimpleConsoleGame.GameWorld;
 internal class Game
 {
     private Map _map = null!;
-    private Creature _player = null!;
+    private Player _player = null!;
     public Game()
     {
     }
@@ -56,6 +56,29 @@ internal class Game
             case ConsoleKey.RightArrow:
                 Move(Direction.East);
                 break;
+            case ConsoleKey.P:
+                PickUp();
+                break;
+        }
+    }
+
+    private void PickUp()
+    {
+        if (_player.BackPack.IsFull)
+        {
+            Console.WriteLine("Backpack is full");
+            return;
+        }
+
+        List<Item> items = _player.Cell.Items;
+        Item? item = items.FirstOrDefault();
+
+        if (item is null) return;
+
+        if (_player.BackPack.Add(item))
+        {
+            Console.WriteLine($"Player pick up the {item}");
+            items.Remove(item);
         }
     }
 
@@ -71,25 +94,7 @@ internal class Game
 
     private void DrawMap()
     {
-        Console.Clear();
-
-        for (int y = 0; y < _map.Height; y++)
-        {
-            for (int x = 0; x < _map.Width; x++)
-            {
-                Cell? cell = _map.GetCell(y, x);
-                ArgumentNullException.ThrowIfNull(cell, nameof(cell));
-
-                IDrawable drawable = _map.Creatures.CreatureAt(cell)
-                                        ?? cell.Items.FirstOrDefault() as IDrawable
-                                        ?? cell;
-
-                Console.ForegroundColor = drawable.Color;
-                Console.Write(drawable.Symbol); 
-            }
-            Console.WriteLine();
-        }
-        Console.ResetColor(); 
+        ConsoleUI.Draw(_map);
     }
 
     private void Init()
