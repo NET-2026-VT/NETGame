@@ -8,7 +8,7 @@ internal class Map : IMap
     public int Height { get; }
     public int Width { get; }
 
-    public List<Creature> Creatures { get; } = new List<Creature>();
+    public List<Creature> Creatures { get; } = [];
 
     public Map(int height, int width)
     {
@@ -35,5 +35,10 @@ internal class Map : IMap
     public Cell? GetCell(Position newPosition)
     {
         return GetCell(newPosition.Y, newPosition.X);
+    }
+
+    public IDrawable? CreatureAt(Cell cell)
+    {
+        return Creatures.FirstOrDefault(c => c.Cell == cell);
     }
 }
