@@ -8,16 +8,18 @@ internal static class MapExtensions
 {
     public static IDrawable? CreatureAt<T>(this IEnumerable<T> creatures, Cell cell) where T : Creature
     {
-        IDrawable? result = null;
+        //IDrawable? result = null;
 
-        foreach (var creature in creatures)
-        {
-            if (creature.Cell == cell)
-            {
-                result = creature;
-                break;
-            }
-        }
-        return result;
+        //foreach (var creature in creatures)
+        //{
+        //    if (creature.Cell == cell)
+        //    {
+        //        result = creature;
+        //        break;
+        //    }
+        //}
+        //return result;
+
+        return creatures.FirstOrDefault(c => c.Cell == cell); 
     }
 }
