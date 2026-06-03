@@ -22,6 +22,12 @@ public class LimitedList<T> : IEnumerable<T>
         _list.Add(item); return true;
     }
 
+    public void Print(Action<T> action)
+    {
+       // _list.ForEach(action);
+        _list.ForEach(x => action?.Invoke(x));
+    }
+
     public IEnumerator<T> GetEnumerator()
     {
         //return _list.GetEnumerator();

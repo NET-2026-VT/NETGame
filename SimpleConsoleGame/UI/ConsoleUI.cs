@@ -1,11 +1,30 @@
 ﻿using SimpleConsoleGame.Extensions;
+using SimpleConsoleGame.LimitedList;
 
 internal class ConsoleUI
 {
+
+    private static MessageLog<string> _log = new(6);
+
+    internal static void AddMessage(string message) => _log.Add(message);
+
+    internal static void PrintLog()
+    {
+        _log.Print(m => Console.WriteLine(m + new string(' ', Console.WindowWidth - m.Length)));
+       // _log.Print(HowToPrint);
+    }
+
+    private static void HowToPrint(string message)
+    {
+        //.....
+        //....
+        //....
+        //....
+        Console.WriteLine(message);
+    }
+
     internal static void Draw(IMap map)
     {
-        Console.Clear();
-
         for (int y = 0; y < map.Height; y++)
         {
             for (int x = 0; x < map.Width; x++)
@@ -27,4 +46,10 @@ internal class ConsoleUI
     }
 
     internal static ConsoleKey GetKey() => Console.ReadKey(intercept: true).Key;
+
+    internal static void Clear()
+    {
+        Console.CursorVisible = false;
+        Console.SetCursorPosition(0, 0);
+    }
 }
