@@ -1,4 +1,5 @@
-﻿using SimpleConsoleGame.GameWorld;
+﻿using SimpleConsoleGame.Characters.Enemies;
+using SimpleConsoleGame.GameWorld;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
@@ -40,5 +41,11 @@ internal class Map : IMap
     public IDrawable? CreatureAt(Cell cell)
     {
         return Creatures.FirstOrDefault(c => c.Cell == cell);
+    }
+
+    internal void Place(Creature creature)
+    {
+        if(CreatureAt(creature.Cell) is null)
+             Creatures.Add(creature);
     }
 }
