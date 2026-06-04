@@ -7,10 +7,12 @@ internal class Game
 {
     private Map _map = null!;
     private Player _player = null!;
+    private readonly ConsoleUI _ui;
     private readonly Dictionary<ConsoleKey, Action> _actionMeny;
 
     public Game()
     {
+        _ui = new ConsoleUI();
         _actionMeny = new Dictionary<ConsoleKey, Action>()
                 {
                     { ConsoleKey.P , PickUp },
@@ -48,7 +50,7 @@ internal class Game
 
     private void GetCommand()
     {
-        ConsoleKey keyPressed = ConsoleUI.GetKey();
+        ConsoleKey keyPressed = _ui.GetKey();
 
         switch (keyPressed)
         {
@@ -84,7 +86,7 @@ internal class Game
     {
         for (int i = 0; i < _player.BackPack.Count; i++)
         {
-            ConsoleUI.AddMessage($"{i + 1}: {_player.BackPack[i]}");
+            _ui.AddMessage($"{i + 1}: {_player.BackPack[i]}");
         }
 
         //_player.BackPack
@@ -108,7 +110,7 @@ internal class Game
     {
         if (_player.BackPack.IsFull)
         {
-            ConsoleUI.AddMessage("Backpack is full");
+            _ui.AddMessage("Backpack is full");
             return;
         }
 
@@ -119,7 +121,7 @@ internal class Game
 
         if (_player.BackPack.Add(item))
         {
-            ConsoleUI.AddMessage($"Player pick up the {item}");
+            _ui.AddMessage($"Player pick up the {item}");
             items.Remove(item);
         }
     }
@@ -136,10 +138,10 @@ internal class Game
 
     private void DrawMap()
     {
-        ConsoleUI.Clear();
-        ConsoleUI.Draw(_map);
-        ConsoleUI.PrintStats($"Health: {_player.Health}");
-        ConsoleUI.PrintLog();
+        _ui.Clear();
+        _ui.Draw(_map);
+        _ui.PrintStats($"Health: {_player.Health}");
+        _ui.PrintLog();
     }
 
     private void Init()
