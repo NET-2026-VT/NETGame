@@ -6,8 +6,15 @@ internal class Game
 {
     private Map _map = null!;
     private Player _player = null!;
+    private readonly Dictionary<ConsoleKey, Action> _actionMeny;
+
     public Game()
     {
+        _actionMeny = new Dictionary<ConsoleKey, Action>()
+                {
+                    { ConsoleKey.P , PickUp },
+                    { ConsoleKey.I , Inventory }
+                };
     }
 
     internal void Run()
@@ -18,14 +25,14 @@ internal class Game
 
     private void Play()
     {
-        bool gameInProgress = true; 
+        bool gameInProgress = true;
         do
         {
             //DrawMap
             DrawMap();
 
             //GetCommand
-            GetCommand(); 
+            GetCommand();
             //Act
 
             //DrawMap
@@ -56,14 +63,20 @@ internal class Game
             case ConsoleKey.RightArrow:
                 Move(Direction.East);
                 break;
-            case ConsoleKey.P:
-                PickUp();
-                break;
-            case ConsoleKey.I:
-                Inventory();
-                break;
+                //case ConsoleKey.P:
+                //    PickUp();
+                //    break;
+                //case ConsoleKey.I:
+                //    Inventory();
+                //    break;
 
         }
+
+        if (_actionMeny.ContainsKey(keyPressed))
+        {
+            _actionMeny[keyPressed]?.Invoke();
+        }
+
     }
 
     private void Inventory()
@@ -116,8 +129,8 @@ internal class Game
         //new Position(_player.Cell.Position.Y + movement.Y, _player.Cell.Position.X + movement.X);
 
         Cell? newCell = _map.GetCell(newPosition);
-        if (newCell is not null) _player.Cell = newCell; 
-        
+        if (newCell is not null) _player.Cell = newCell;
+
     }
 
     private void DrawMap()
@@ -131,8 +144,8 @@ internal class Game
     private void Init()
     {
         //ToDo: Read from config
-        _map = new Map(height:15, width: 15);
-        Cell? playerCell = _map.GetCell(0, 0); 
+        _map = new Map(height: 15, width: 15);
+        Cell? playerCell = _map.GetCell(0, 0);
         _player = new Player(playerCell!);
         _map.Creatures.Add(_player);
 
