@@ -5,4 +5,6 @@ using SimpleConsoleGame.LimitedList;
 
 var game = new Game();
 
-game.Run(); 
+game.Run();
+
+Console.WriteLine("Game Over");

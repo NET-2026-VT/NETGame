@@ -13,7 +13,9 @@ namespace SimpleConsoleGame
         {
             Color = ConsoleColor.White;
             BackPack = new LimitedList<Item>(3);
-            Damage = 100;
+            Damage = 30;
         }
+
+        
     }
 }

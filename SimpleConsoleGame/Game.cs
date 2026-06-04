@@ -2,11 +2,13 @@
 using SimpleConsoleGame.Characters.Enemies;
 using SimpleConsoleGame.Extensions;
 using SimpleConsoleGame.GameWorld;
+using System.Threading.Channels;
 
 internal class Game
 {
     private Map _map = null!;
     private Player _player = null!;
+    private bool _gameInProgress;
     private readonly ConsoleUI _ui;
     private readonly Dictionary<ConsoleKey, Action> _actionMeny;
 
@@ -43,7 +45,7 @@ internal class Game
 
     private void Play()
     {
-        bool gameInProgress = true;
+        _gameInProgress = true;
         do
         {
             //DrawMap
@@ -60,7 +62,7 @@ internal class Game
             //DrawMap
 
 
-        } while (gameInProgress);
+        } while (_gameInProgress);
     }
 
     private void GetCommand()
@@ -146,7 +148,17 @@ internal class Game
         Position newPosition = _player.Cell.Position + movement;
         Cell? newCell = _map.GetCell(newPosition);
         if (newCell is not null) 
-        { 
+        {
+            Creature? opponent = _map.CreatureAt(newCell) as Creature;
+
+            if (opponent != null)
+            {
+                _player.Attack(opponent);
+                opponent.Attack(_player);
+            }
+
+            _gameInProgress = !_player.IsDead;
+
             _player.Cell = newCell;
             if(newCell.Items.Any())
                 _ui.AddMessage($"Too see: {string.Join(", ", newCell.Items)}");
@@ -158,7 +170,7 @@ internal class Game
     {
         _ui.Clear();
         _ui.Draw(_map);
-        _ui.PrintStats($"Health: {_player.Health}");
+        _ui.PrintStats($"Health: {_player.Health}, Enemys: {_map.Creatures.Where(c => !c.IsDead).Count() - 1} ");
         _ui.PrintLog();
     }
 
@@ -176,7 +188,8 @@ internal class Game
         //_map.GetCell(1, 1)?.Items.Add(Item.Coin());
         //_map.GetCell(1, 1)?.Items.Add(Item.Coin());
         //_map.GetCell(1, 1)?.Items.Add(Item.Coin());
- 
+        Creature.AddToLog = _ui.AddMessage;
+       // Creature.AddToLog += Console.WriteLine;
 
         RCell().Items.Add(Item.Stone());
         RCell().Items.Add(Item.Coin());

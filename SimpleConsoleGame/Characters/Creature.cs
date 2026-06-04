@@ -1,10 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using SimpleConsoleGame.GameWorld;
+using System.Diagnostics.CodeAnalysis;
 
 internal abstract class Creature : IDrawable
 {
     private Cell _cell;
     private int _health;
     private ConsoleColor _color;
+    private string _name;
 
     public string Symbol { get; }
     public int MaxHealth { get; }
@@ -32,6 +34,8 @@ internal abstract class Creature : IDrawable
         }
     }
 
+    public static Action<string>? AddToLog { get; set; }
+
     //public Cell Cell
     //{
     //    get => field;
@@ -51,5 +55,18 @@ internal abstract class Creature : IDrawable
         MaxHealth = maxHealth;
         Health = maxHealth;
         Color = ConsoleColor.Green;
+        _name = GetType().Name;
+    }
+
+    internal void Attack(Creature target)
+    {
+        if (target.IsDead || this.IsDead) return;
+
+        target.Health -= this.Damage;
+
+        AddToLog?.Invoke($"The {this._name} attacks the {target._name} for {this.Damage}");
+
+        if (target.IsDead)
+            AddToLog?.Invoke($"The {target._name} is dead");
     }
 }
