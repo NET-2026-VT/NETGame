@@ -47,4 +47,7 @@ public class LimitedList<T> : IEnumerable<T>
     }
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public bool Remove(T item) => _list.Remove(item);
+
 }
