@@ -19,7 +19,7 @@ internal abstract class Creature : IDrawable
     public int Health
     {
         get => _health;
-        set => _health = value >= MaxHealth ? MaxHealth : value;
+        private set => _health = value >= MaxHealth ? MaxHealth : value;
     }
     public Cell Cell
     {

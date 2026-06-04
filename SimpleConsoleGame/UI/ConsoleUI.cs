@@ -52,4 +52,11 @@ internal class ConsoleUI
         Console.CursorVisible = false;
         Console.SetCursorPosition(0, 0);
     }
+
+    internal static void PrintStats(string stats)
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine(stats);
+        Console.ResetColor();
+    }
 }
