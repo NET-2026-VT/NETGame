@@ -59,7 +59,35 @@ internal class Game
             case ConsoleKey.P:
                 PickUp();
                 break;
+            case ConsoleKey.I:
+                Inventory();
+                break;
+
         }
+    }
+
+    private void Inventory()
+    {
+        for (int i = 0; i < _player.BackPack.Count; i++)
+        {
+            ConsoleUI.AddMessage($"{i + 1}: {_player.BackPack[i]}");
+        }
+
+        //_player.BackPack
+        //   .Select((x, i) => $"{i + 1}: {x}")
+        //   .ToList()
+        //   .ForEach(ConsoleUI.AddMessage);
+
+
+        //_player.BackPack
+        //   .Select((x, i) => $"{i + 1}: {x}")
+        //   .ForEach(ConsoleUI.AddMessage);
+
+        //foreach (var msg in _player.BackPack.Select((x, i) => $"{i + 1}: {x}"))
+        //{
+        //    ConsoleUI.AddMessage(msg);
+        //}
+
     }
 
     private void PickUp()
