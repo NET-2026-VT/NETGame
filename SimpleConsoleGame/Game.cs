@@ -144,10 +144,13 @@ internal class Game
     private void Move(Position movement)
     {
         Position newPosition = _player.Cell.Position + movement;
-        //new Position(_player.Cell.Position.Y + movement.Y, _player.Cell.Position.X + movement.X);
-
         Cell? newCell = _map.GetCell(newPosition);
-        if (newCell is not null) _player.Cell = newCell;
+        if (newCell is not null) 
+        { 
+            _player.Cell = newCell;
+            if(newCell.Items.Any())
+                _ui.AddMessage($"Too see: {string.Join(", ", newCell.Items)}");
+        }
 
     }
 
@@ -169,6 +172,12 @@ internal class Game
 
         var r = new Random();
 
+        //_map.GetCell(1, 1)?.Items.Add(Item.Coin());
+        //_map.GetCell(1, 1)?.Items.Add(Item.Coin());
+        //_map.GetCell(1, 1)?.Items.Add(Item.Coin());
+        //_map.GetCell(1, 1)?.Items.Add(Item.Coin());
+ 
+
         RCell().Items.Add(Item.Stone());
         RCell().Items.Add(Item.Coin());
         RCell().Items.Add(Item.Stone());
@@ -187,7 +196,7 @@ internal class Game
         _map.Place(new Goblin(RCell()));
         _map.Place(new Goblin(RCell()));
         _map.Place(new Goblin(RCell()));
- 
+
 
 
         Cell RCell()
