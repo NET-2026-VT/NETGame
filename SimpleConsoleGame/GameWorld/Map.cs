@@ -43,7 +43,7 @@ internal class Map : IMap
         return Creatures.FirstOrDefault(c => c.Cell == cell);
     }
 
-    internal void Place(Creature creature)
+    public void Place(Creature creature)
     {
         if(CreatureAt(creature.Cell) is null)
              Creatures.Add(creature);

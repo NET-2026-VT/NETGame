@@ -170,15 +170,13 @@ internal class Game
     private void DrawMap()
     {
         _ui.Clear();
-        _ui.Draw(_map);
+        _ui.Draw();
         _ui.PrintStats($"Health: {_player.Health}, Enemys: {_map.Creatures.Where(c => !c.IsDead).Count() - 1} ");
         _ui.PrintLog();
     }
 
     private void Init()
     {
-        //ToDo: Read from config
-      // _map = new Map(height: 15, width: 15);
         Cell? playerCell = _map.GetCell(0, 0);
         _player = new Player(playerCell!);
         _map.Creatures.Add(_player);
