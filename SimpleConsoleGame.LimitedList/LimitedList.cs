@@ -2,7 +2,7 @@
 
 namespace SimpleConsoleGame.LimitedList;
 
-public class LimitedList<T> : IEnumerable<T> 
+public class LimitedList<T> : ILimitedList<T>
 {
     protected List<T> _list;
     private int _capacity;
@@ -10,7 +10,7 @@ public class LimitedList<T> : IEnumerable<T>
     public int Count => _list.Count;
     public bool IsFull => _capacity <= Count;
 
-    public T this[int index]  => _list[index];
+    public T this[int index] => _list[index];
     //{
     //    get => _list[index]; 
     //    set => _list[index] = value; 
@@ -24,13 +24,13 @@ public class LimitedList<T> : IEnumerable<T>
 
     public virtual bool Add(T item)
     {
-        if(IsFull) return false;
+        if (IsFull) return false;
         _list.Add(item); return true;
     }
 
     public void Print(Action<T> action)
     {
-       // _list.ForEach(action);
+        // _list.ForEach(action);
         _list.ForEach(x => action?.Invoke(x));
     }
 

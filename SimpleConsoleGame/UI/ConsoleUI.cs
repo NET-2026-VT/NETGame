@@ -4,12 +4,14 @@ using SimpleConsoleGame.LimitedList;
 internal class ConsoleUI : IConsoleUI
 {
 
-    private MessageLog<string> _log = new(6);
+    private ILimitedList<string> _log;
+        
     private readonly IMap _map;
 
-    public ConsoleUI(IMap map)
+    public ConsoleUI(IMap map, ILimitedList<string> log)
     {
        _map  = map;
+        _log = log;
     }
 
     public void AddMessage(string message) => _log.Add(message);
