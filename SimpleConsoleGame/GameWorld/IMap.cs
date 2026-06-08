@@ -9,4 +9,5 @@ internal interface IMap
     Cell? GetCell(int y, int x);
     Cell? GetCell(Position newPosition);
     IDrawable? CreatureAt(Cell cell);
+    void Place(Creature creature);
 }

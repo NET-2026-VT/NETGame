@@ -6,15 +6,16 @@ using System.Threading.Channels;
 
 internal class Game
 {
-    private Map _map = null!;
+    private IMap _map;
     private Player _player = null!;
     private bool _gameInProgress;
-    private readonly ConsoleUI _ui;
+    private readonly IConsoleUI _ui;
     private readonly Dictionary<ConsoleKey, Action> _actionMeny;
 
-    public Game()
+    public Game(IConsoleUI ui, IMap map)
     {
-        _ui = new ConsoleUI();
+        _ui = ui;
+        _map = map;
         _actionMeny = new Dictionary<ConsoleKey, Action>()
                 {
                     { ConsoleKey.P , PickUp },
@@ -177,7 +178,7 @@ internal class Game
     private void Init()
     {
         //ToDo: Read from config
-        _map = new Map(height: 15, width: 15);
+      // _map = new Map(height: 15, width: 15);
         Cell? playerCell = _map.GetCell(0, 0);
         _player = new Player(playerCell!);
         _map.Creatures.Add(_player);

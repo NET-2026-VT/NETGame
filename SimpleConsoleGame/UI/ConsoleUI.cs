@@ -1,10 +1,16 @@
 ﻿using SimpleConsoleGame.Extensions;
 using SimpleConsoleGame.LimitedList;
 
-internal class ConsoleUI 
+internal class ConsoleUI : IConsoleUI
 {
 
     private MessageLog<string> _log = new(6);
+    private readonly IMap _map;
+
+    public ConsoleUI(IMap map)
+    {
+       _map  = map;
+    }
 
     public void AddMessage(string message) => _log.Add(message);
 
@@ -14,16 +20,16 @@ internal class ConsoleUI
         // _log.Print(HowToPrint);
     }
 
-    public void Draw(IMap map)
+    public void Draw()
     {
-        for (int y = 0; y < map.Height; y++)
+        for (int y = 0; y < _map.Height; y++)
         {
-            for (int x = 0; x < map.Width; x++)
+            for (int x = 0; x < _map.Width; x++)
             {
-                Cell? cell = map.GetCell(y, x);
+                Cell? cell = _map.GetCell(y, x);
                 ArgumentNullException.ThrowIfNull(cell, nameof(cell));
 
-                IDrawable drawable = map.CreatureAt(cell)
+                IDrawable drawable = _map.CreatureAt(cell)
                                         ?? cell.Items.FirstOrDefault() as IDrawable
                                         ?? cell;
 
