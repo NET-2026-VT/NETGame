@@ -34,6 +34,12 @@ public class LimitedList<T> : ILimitedList<T>
         _list.ForEach(x => action?.Invoke(x));
     }
 
+    public void ForEach(Action<T, int> action)
+    {
+        for (int i = 0; i < _list.Count; i++)
+            action(_list[i], i);
+    }
+
     public IEnumerator<T> GetEnumerator()
     {
         //return _list.GetEnumerator();

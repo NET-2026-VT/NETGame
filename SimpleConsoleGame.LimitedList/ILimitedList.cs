@@ -9,5 +9,6 @@ public interface ILimitedList<T> : IEnumerable<T>
 
     bool Add(T item);
     void Print(Action<T> action);
+    void ForEach(Action<T, int> action);
     bool Remove(T item);
 }

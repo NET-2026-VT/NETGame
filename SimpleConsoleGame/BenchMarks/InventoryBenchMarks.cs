@@ -29,4 +29,19 @@ public class InventoryBenchMarks
                 throw new InvalidOperationException($"Backpack full at {i} items (capacity {ItemCount}).");
         }
     }
+
+    [Benchmark(Baseline = true, Description = "for-loop with index + string interpolation")]
+    public void ForLoop_Indexed() => _sut.Inventory_ForLoop();
+
+    [Benchmark(Description = "LINQ Select in ordinary foreach")]
+    public void Linq_Select_Foreach() => _sut.Inventory_Linq();
+
+    [Benchmark(Description = "LINQ Select + ToList + List.ForEach")]
+    public void Linq_Select_ToList_ForEach() => _sut.Inventory_Linq_With_ToList();
+
+    [Benchmark(Description = "LINQ Select + custom IEnumerable.ForEach extension")]
+    public void Linq_Select_CustomForEach() => _sut.Inventory_Linq_ForEachExtension();
+
+    [Benchmark(Description = "LimitedsList.ForEach(item, index)")]
+    public void LimitedList_ForEach() => _sut.Inventory_Foreach_From_Backpack();
 }
