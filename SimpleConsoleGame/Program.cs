@@ -1,9 +1,9 @@
-﻿using BenchmarkDotNet.Running;
-using SimpleConsoleGame;
-using SimpleConsoleGame.BenchMarks;
+﻿using SimpleConsoleGame;
 
 
 #if BENCHMARK
+using SimpleConsoleGame.BenchMarks;
+using BenchmarkDotNet.Running;
 BenchmarkRunner.Run<InventoryBenchMarks>();
 #else
 
