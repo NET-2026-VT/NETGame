@@ -1,5 +1,11 @@
 ﻿using SimpleConsoleGame;
 
+//Use when multiple benchmarks
+//BenchmarkSwitcher.FromTypes(
+//[
+//    typeof(InventoryBenchMarks),
+//]).Run(args);
+
 
 #if BENCHMARK
 using SimpleConsoleGame.BenchMarks;
@@ -12,3 +18,4 @@ new SetUp().SetUpGame();
 Console.WriteLine("Game Over");
 
 #endif
+
