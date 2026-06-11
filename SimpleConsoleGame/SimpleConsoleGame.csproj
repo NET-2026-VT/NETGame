@@ -16,6 +16,10 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.8" />
   </ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="SimpleConsoleGame.Tests"/>
+	</ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\SimpleConsoleGame.LimitedList\SimpleConsoleGame.LimitedList.csproj" />
   </ItemGroup>
