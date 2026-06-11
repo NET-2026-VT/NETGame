@@ -1,7 +1,9 @@
 ﻿using System.Runtime.CompilerServices;
 
+//Correct syntax...
+//[assembly: InternalsVisibleTo("SimpleConsoleGame.Tests")]
+
 namespace SimpleConsoleGame.Services;
-//[assembly(InternalsVisebleTo(""))]
 
 internal interface IGetMapService
 {
