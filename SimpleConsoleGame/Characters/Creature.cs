@@ -6,7 +6,7 @@ internal abstract class Creature : IDrawable
     private Cell _cell;
     private int _health;
     private ConsoleColor _color;
-    private string _name;
+    public string Name { get; }
 
     public string Symbol { get; }
     public int MaxHealth { get; }
@@ -21,7 +21,7 @@ internal abstract class Creature : IDrawable
     public int Health
     {
         get => _health;
-        private set => _health = value >= MaxHealth ? MaxHealth : value;
+        set => _health = value >= MaxHealth ? MaxHealth : value;
     }
     public Cell Cell
     {
@@ -55,7 +55,7 @@ internal abstract class Creature : IDrawable
         MaxHealth = maxHealth;
         Health = maxHealth;
         Color = ConsoleColor.Green;
-        _name = GetType().Name;
+        Name = GetType().Name;
     }
 
     internal void Attack(Creature target)
@@ -64,9 +64,9 @@ internal abstract class Creature : IDrawable
 
         target.Health -= this.Damage;
 
-        AddToLog?.Invoke($"The {this._name} attacks the {target._name} for {this.Damage}");
+        AddToLog?.Invoke($"The {this.Name} attacks the {target.Name} for {this.Damage}");
 
         if (target.IsDead)
-            AddToLog?.Invoke($"The {target._name} is dead");
+            AddToLog?.Invoke($"The {target.Name} is dead");
     }
 }
