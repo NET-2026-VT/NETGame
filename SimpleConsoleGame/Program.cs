@@ -5,6 +5,7 @@ using SimpleConsoleGame;
 using SimpleConsoleGame.Extensions;
 using SimpleConsoleGame.GameWorld;
 using SimpleConsoleGame.LimitedList;
+using SimpleConsoleGame.Services;
 using SimpleConsoleGame.Settings;
 
 
@@ -12,6 +13,7 @@ using SimpleConsoleGame.Settings;
 //                                .SetBasePath(Environment.CurrentDirectory)
 //                                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
 //                                .Build();
+
 
 var host = Host.CreateDefaultBuilder(args)
                .ConfigureServices(services =>
@@ -25,6 +27,8 @@ var host = Host.CreateDefaultBuilder(args)
                        var config = sp.GetRequiredService<IConfiguration>();
                        return config.GetSection("game:mapsettings").Get<MapSettings>()!;
                    });
+
+                   services.AddSingleton<IGetMapService, GetMapService>();
                    services.AddSingleton<Game>();
                    services.AddSingleton<ILimitedList<string>>(new MessageLog<string>(6));
                    services.AddSingleton<ILimitedList<Item>>(new LimitedList<Item>(3));
