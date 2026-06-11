@@ -2,6 +2,7 @@
 using SimpleConsoleGame.Characters.Enemies;
 using SimpleConsoleGame.Extensions;
 using SimpleConsoleGame.GameWorld;
+using SimpleConsoleGame.Settings;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
@@ -13,10 +14,13 @@ internal class Map : IMap
 
     public List<Creature> Creatures { get; } = [];
 
-    public Map(IConfiguration config)
+   // public Map(IConfiguration config)
+    public Map(IMapSettings settings)
     {
-        Height = config.GetMapSizeFor("y");
-        Width = config.GetMapSizeFor("x");
+        //Height = config.GetMapSizeFor("y");
+        //Width = config.GetMapSizeFor("x");
+        Height = settings.Y;
+        Width = settings.X;
 
         _cells = new Cell[Height, Width];
 

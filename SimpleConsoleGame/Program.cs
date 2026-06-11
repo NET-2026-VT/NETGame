@@ -5,6 +5,7 @@ using SimpleConsoleGame;
 using SimpleConsoleGame.Extensions;
 using SimpleConsoleGame.GameWorld;
 using SimpleConsoleGame.LimitedList;
+using SimpleConsoleGame.Settings;
 
 
 //IConfiguration config = new ConfigurationBuilder()
@@ -18,6 +19,12 @@ var host = Host.CreateDefaultBuilder(args)
                    services.AddSingleton<IConsoleUI, ConsoleUI>();
                    services.AddSingleton<IMap, Map>();
                   // services.AddSingleton<IConfiguration>(config);
+
+                   services.AddSingleton<IMapSettings>(sp =>
+                   {
+                       var config = sp.GetRequiredService<IConfiguration>();
+                       return config.GetSection("game:mapsettings").Get<MapSettings>()!;
+                   });
                    services.AddSingleton<Game>();
                    services.AddSingleton<ILimitedList<string>>(new MessageLog<string>(6));
                    services.AddSingleton<ILimitedList<Item>>(new LimitedList<Item>(3));
