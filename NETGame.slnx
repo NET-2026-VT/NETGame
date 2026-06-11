@@ -3,4 +3,7 @@
     <Project Path="SimpleConsoleGame.LimitedList/SimpleConsoleGame.LimitedList.csproj" Id="3a4b2260-ec58-4bf9-8d3c-4aa579edd970" />
     <Project Path="SimpleConsoleGame/SimpleConsoleGame.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="SimpleConsoleGame.Tests/SimpleConsoleGame.Tests.csproj" Id="e8324b5d-c8a3-48c1-8543-b28fda8422f4" />
+  </Folder>
 </Solution>
